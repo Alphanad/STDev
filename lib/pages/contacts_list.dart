@@ -64,7 +64,7 @@ class _ContactsListState extends State<ContactsList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(builder: (context) => const AddContact()),
           );

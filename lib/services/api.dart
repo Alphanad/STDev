@@ -22,4 +22,21 @@ class API {
       throw Exception('Failed to load contacts.');
     }
   }
+
+  static Future<bool> createContact(Contact contact) async {
+    try {
+      final response = await http.post(
+          Uri.parse(_baseURL),
+          headers: _headers,
+          body: jsonEncode(contact.toJson())
+      );
+      if (response.statusCode == 201) {
+        return true;
+      } else{
+        return false;
+      }
+    } catch(e) {
+      return false;
+    }
+  }
 }
