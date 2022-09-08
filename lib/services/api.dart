@@ -39,4 +39,20 @@ class API {
       return false;
     }
   }
+
+  static Future<bool> deleteContact(String id) async {
+    try {
+      final response = await http.delete(
+        Uri.parse('$_baseURL/$id'),
+        headers: _headers,
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch(e) {
+      return false;
+    }
+  }
 }

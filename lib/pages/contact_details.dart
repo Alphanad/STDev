@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stdev/services/api.dart';
 import 'package:stdev/models/contact.dart';
 import 'package:stdev/pages/contacts_list.dart';
 
@@ -17,6 +18,7 @@ class ContactDetailsState extends State<ContactDetails> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _notesController = TextEditingController();
+  bool _buttonEnable = true;
 
   @override
   void initState() {
@@ -36,6 +38,29 @@ class ContactDetailsState extends State<ContactDetails> {
     _emailController.dispose();
     _notesController.dispose();
     super.dispose();
+  }
+
+  void _onPressDo() async {
+    setState(() {
+      _buttonEnable = false;
+    });
+    bool response = await API.deleteContact(widget.contact.sId!);
+    if(response == true) {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Contact deleted!"),
+      ));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ContactsList()),
+      );
+    } else {
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Something went wrong!"),
+      ));
+      setState(() {
+        _buttonEnable = true;
+      });
+    }
   }
 
   @override
@@ -90,6 +115,17 @@ class ContactDetailsState extends State<ContactDetails> {
                   child: customTextField(_notesController, const Icon(Icons.email), 'Notes', 5)),
             ]),
           ),
+        ),
+        floatingActionButton: _buttonEnable ? FloatingActionButton(
+          backgroundColor: Colors.red,
+          onPressed: () {
+            _onPressDo();
+          },
+          child: const Icon(Icons.delete),
+        ) : FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.grey,
+          child: const CircularProgressIndicator(color: Colors.white,),
         ),
       ),
     );
