@@ -14,7 +14,7 @@ class _ContactsListState extends State<ContactsList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Contacts', style: TextStyle(color: Colors.black),), backgroundColor: Colors.white, elevation: 0,),
+      appBar: AppBar(title: const Text('Contacts', style: TextStyle(color: Colors.black),), backgroundColor: Colors.transparent, elevation: 0,),
       body: Center(
         child: FutureBuilder(
           future: API.getContacts(),
