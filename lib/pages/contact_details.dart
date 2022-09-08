@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:stdev/models/contact.dart';
 import 'package:stdev/pages/contacts_list.dart';
 
-class ContactInfo extends StatefulWidget {
-  const ContactInfo({Key? key, required this.contact}) : super(key: key);
+class ContactDetails extends StatefulWidget {
+  const ContactDetails({Key? key, required this.contact}) : super(key: key);
 
   final Contact contact;
 
   @override
-  State<StatefulWidget> createState() => ContactInfoState();
+  State<StatefulWidget> createState() => ContactDetailsState();
 }
 
-class ContactInfoState extends State<ContactInfo> {
+class ContactDetailsState extends State<ContactDetails> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _phoneController = TextEditingController();

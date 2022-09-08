@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stdev/pages/contact_info.dart';
 import 'package:stdev/services/api.dart';
 import 'package:stdev/models/contact.dart';
-import 'package:stdev/pages/add_contact.dart';
+import 'package:stdev/pages/new_contact.dart';
+import 'package:stdev/pages/contact_details.dart';
 
 class ContactsList extends StatefulWidget {
   const ContactsList({Key? key}) : super(key: key);
@@ -38,7 +38,7 @@ class _ContactsListState extends State<ContactsList> {
                           onTap: () {
                             Navigator.pushReplacement(
                               context,
-                              MaterialPageRoute(builder: (context) => ContactInfo(contact: snapshot.data![index])),
+                              MaterialPageRoute(builder: (context) => ContactDetails(contact: snapshot.data![index])),
                             );
                           },
                           child: ListTile(
@@ -72,7 +72,7 @@ class _ContactsListState extends State<ContactsList> {
         onPressed: () {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const AddContact()),
+            MaterialPageRoute(builder: (context) => const NewContact()),
           );
         },
         child: const Icon(Icons.add),

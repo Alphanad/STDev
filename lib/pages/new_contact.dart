@@ -6,14 +6,14 @@ import 'package:stdev/utils/validators.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:stdev/pages/contacts_list.dart';
 
-class AddContact extends StatefulWidget {
-  const AddContact({Key? key}) : super(key: key);
+class NewContact extends StatefulWidget {
+  const NewContact({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => AddContactState();
+  State<StatefulWidget> createState() => NewContactState();
 }
 
-class AddContactState extends State<AddContact> {
+class NewContactState extends State<NewContact> {
   final _formKey = GlobalKey<FormState>();
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
