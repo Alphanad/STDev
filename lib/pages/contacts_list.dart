@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stdev/services/web.dart';
+import 'package:stdev/services/api.dart';
 import 'package:stdev/models/contact.dart';
 import 'package:stdev/pages/add_contact.dart';
 
@@ -17,7 +17,7 @@ class _ContactsListState extends State<ContactsList> {
       appBar: AppBar(title: const Text('Contacts', style: TextStyle(color: Colors.black),), backgroundColor: Colors.white, elevation: 0,),
       body: Center(
         child: FutureBuilder(
-          future: Web.getContacts(),
+          future: API.getContacts(),
           builder: (
               BuildContext context,
               AsyncSnapshot<List<Contact>> snapshot,

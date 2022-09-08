@@ -9,7 +9,7 @@ const _headers = {
   'x-apikey': '62e3e6d11894fe7edea71921'
 };
 
-class Web {
+class API {
   static Future<List<Contact>> getContacts() async {
     final response = await http.get(
       Uri.parse(_baseURL),
