@@ -98,7 +98,7 @@ class AddContactState extends State<AddContact> {
               );
             },
           ),
-            title: const Text('Save Contact', style: TextStyle(color: Colors.black),), iconTheme: const IconThemeData(color: Colors.black,), backgroundColor: Colors.transparent, elevation: 0, centerTitle: true,),
+            title: const Text('Add Contact', style: TextStyle(color: Colors.black),), iconTheme: const IconThemeData(color: Colors.black,), backgroundColor: Colors.transparent, elevation: 0, centerTitle: true,),
           body: SingleChildScrollView(
             child: Form(
               key: _formKey,

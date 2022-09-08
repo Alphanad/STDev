@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stdev/pages/contact_info.dart';
 import 'package:stdev/services/api.dart';
 import 'package:stdev/models/contact.dart';
 import 'package:stdev/pages/add_contact.dart';
@@ -34,7 +35,12 @@ class _ContactsListState extends State<ContactsList> {
                     return Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(builder: (context) => ContactInfo(contact: snapshot.data![index])),
+                            );
+                          },
                           child: ListTile(
                             leading: snapshot.data![index].picture!.isNotEmpty ?
                             CircleAvatar(
