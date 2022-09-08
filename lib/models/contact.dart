@@ -7,14 +7,7 @@ class Contact {
   String? phone;
   List<String>? picture;
 
-  Contact(
-      {this.sId,
-        this.firstName,
-        this.lastName,
-        this.email,
-        this.notes,
-        this.phone,
-        this.picture});
+  Contact({this.sId, this.firstName, this.lastName, this.email, this.notes, this.phone, this.picture});
 
   Contact.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];

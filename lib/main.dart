@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stdev/pages/contacts_list.dart';
+import 'package:stdev/pages/splash.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ContactsList(),
+      home: const Splash(),
     );
   }
 }
