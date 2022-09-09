@@ -78,7 +78,7 @@ class _HomeState extends State<Home> {
           alignment: Alignment.center,
           child: ElevatedButton(
             onPressed: () => _onLogout(),
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red, textStyle: const TextStyle(fontSize: 25), padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.1, vertical: screenSize.height * 0.03)),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red, textStyle: const TextStyle(fontSize: 20), padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.1, vertical: screenSize.height * 0.03)),
             child: const Text(Strings.logout),
           ),
         ),
