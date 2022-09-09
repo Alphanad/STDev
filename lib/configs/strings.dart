@@ -12,7 +12,7 @@ class Strings {
   static const lastName = "Last name";
   static const firstName = "First name";
   static const editContact = "Edit contact";
-  static const addContact = "Contact details";
+  static const addContact = "Add contact";
   static const emptyError = "Can't be empty.";
   static const error = "Something went wrong!";
   static const contactAdded = "Contact added!";
