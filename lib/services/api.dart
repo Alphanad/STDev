@@ -15,7 +15,7 @@ class API {
       final parsed = jsonDecode(response.body).cast<Map<String, dynamic>>();
       return parsed.map<Contact>((json) => Contact.fromJson(json)).toList();
     } else {
-      throw Exception('Failed to load contacts.');
+      throw Exception("Failed to load contacts.");
     }
   }
 

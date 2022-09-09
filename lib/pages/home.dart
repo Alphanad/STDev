@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stdev/pages/login.dart';
 import 'package:stdev/services/api.dart';
 import 'package:stdev/models/contact.dart';
+import 'package:stdev/configs/strings.dart';
 import 'package:stdev/pages/information.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -28,60 +29,33 @@ class _HomeState extends State<Home> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.menu,
-            color: Colors.black,
-          ),
-          onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-        ),
-        title: const Text(
-          'Contacts',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.transparent,
         elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: const Text(Strings.contacts, style: TextStyle(color: Colors.black)),
+        leading: IconButton(icon: const Icon(Icons.menu, color: Colors.black), onPressed: () => _scaffoldKey.currentState?.openDrawer()),
       ),
       body: Center(
         child: FutureBuilder(
           future: API.getContacts(),
-          builder: (
-            BuildContext context,
-            AsyncSnapshot<List<Contact>> snapshot,
-          ) {
+          builder: (BuildContext context, AsyncSnapshot<List<Contact>> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             } else if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasError) {
-                return const Text('Error');
+                return const Text(Strings.error);
               } else if (snapshot.hasData) {
                 return snapshot.data!.isNotEmpty
                     ? ListView.builder(
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, index) {
                           return Column(
-                            children: [
+                            children: <Widget>[
                               GestureDetector(
-                                onTap: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => Information(contact: snapshot.data![index])),
-                                  );
-                                },
+                                onTap: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Information(contact: snapshot.data![index]))),
                                 child: ListTile(
-                                  leading: snapshot.data![index].picture!.isNotEmpty
-                                      ? CircleAvatar(
-                                          backgroundImage: NetworkImage(snapshot.data![index].picture!.first),
-                                        )
-                                      : CircleAvatar(
-                                          backgroundColor: Colors.grey,
-                                          child: Text(
-                                            snapshot.data![index].firstName![0],
-                                            style: const TextStyle(color: Colors.white),
-                                          ),
-                                        ),
-                                  title: Text('${snapshot.data![index].firstName} ${snapshot.data![index].lastName}'),
                                   subtitle: Text(snapshot.data![index].phone!),
+                                  title: Text('${snapshot.data![index].firstName} ${snapshot.data![index].lastName}'),
+                                  leading: snapshot.data![index].picture!.isNotEmpty ? CircleAvatar(backgroundImage: NetworkImage(snapshot.data![index].picture!.first)) : CircleAvatar(backgroundColor: Colors.grey, child: Text(snapshot.data![index].firstName![0], style: const TextStyle(color: Colors.white))),
                                 ),
                               ),
                               const Divider()
@@ -89,12 +63,12 @@ class _HomeState extends State<Home> {
                           );
                         },
                       )
-                    : const Text("You don't have any contact yet!");
+                    : const Text(Strings.noContacts);
               } else {
-                return const Text('Empty data');
+                return const Text(Strings.empty);
               }
             } else {
-              return Text('State: ${snapshot.connectionState}');
+              return Text('${Strings.state}: ${snapshot.connectionState}');
             }
           },
         ),
@@ -102,17 +76,16 @@ class _HomeState extends State<Home> {
       drawer: Drawer(
         child: Align(
           alignment: Alignment.center,
-          child: ElevatedButton(onPressed: () => _onLogout(), style: ElevatedButton.styleFrom(backgroundColor: Colors.red, padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.1, vertical: screenSize.height * 0.03), textStyle: const TextStyle(fontSize: 25)), child: const Text('Log out')),
+          child: ElevatedButton(
+            onPressed: () => _onLogout(),
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red, textStyle: const TextStyle(fontSize: 25), padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.1, vertical: screenSize.height * 0.03)),
+            child: const Text(Strings.logout),
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => const Information()),
-          );
-        },
         child: const Icon(Icons.add),
+        onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Information())),
       ),
     );
   }

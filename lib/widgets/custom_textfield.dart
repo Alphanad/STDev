@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:stdev/utils/validators.dart';
 
 class CustomTextField extends StatefulWidget {
-  const CustomTextField({Key? key, this.enable, this.controller, this.keyboardType, this.textInputAction, this.maxLines, this.isEmailValidator, this.icon, this.prefixIcon, this.labelText, this.obscureText}) : super(key: key);
-
   final bool? enable;
-  final TextEditingController? controller;
+  final int? maxLines;
+  final bool? obscureText;
+  final String? labelText;
+  final Widget? prefixIcon;
+  final bool? isEmailValidator;
   final TextInputType? keyboardType;
   final TextInputAction? textInputAction;
-  final int? maxLines;
-  final bool? isEmailValidator;
-  final Widget? icon;
-  final Widget? prefixIcon;
-  final String? labelText;
-  final bool? obscureText;
+  final TextEditingController? controller;
+
+  const CustomTextField({Key? key, this.enable, this.maxLines, this.obscureText, this.labelText, this.prefixIcon, this.isEmailValidator, this.keyboardType, this.textInputAction, this.controller}) : super(key: key);
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -25,9 +24,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
     return TextFormField(
         enabled: widget.enable,
         controller: widget.controller,
+        maxLines: widget.maxLines ?? 1,
         keyboardType: widget.keyboardType,
         textInputAction: widget.textInputAction,
-        maxLines: widget.maxLines,
         obscureText: widget.obscureText ?? false,
         validator: (value) {
           if (widget.isEmailValidator!) {
@@ -37,8 +36,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           }
         },
         decoration: InputDecoration(
-            prefixIcon: widget.prefixIcon,
             labelText: widget.labelText,
+            prefixIcon: widget.prefixIcon,
             enabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(width: 1),
             ),
@@ -53,6 +52,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ),
             disabledBorder: const UnderlineInputBorder(
               borderSide: BorderSide(width: 1),
-            )));
+            )
+        )
+    );
   }
 }
